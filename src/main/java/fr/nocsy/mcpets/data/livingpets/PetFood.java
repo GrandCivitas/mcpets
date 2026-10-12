@@ -346,6 +346,11 @@ public class PetFood {
                 break;
             }
 
+            // custom-item-id matching only applies to foods that are actually custom items -
+            // skip it for plain vanilla-material foods, otherwise two unrelated default MC
+            // items can falsely match each other via a null/absent custom id on both sides
+            if (petFoods.defaultMCItem) continue;
+
             // find ItemsAdder Items
             if (MCPets.isItemsAdderLoaded()) {
                 CustomStack handCustomStack = CustomStack.byItemStack(handItem);
